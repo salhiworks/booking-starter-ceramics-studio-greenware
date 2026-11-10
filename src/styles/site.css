@@ -1,0 +1,2095 @@
+/*
+ * Turning Room Pottery Studio — page styles (Greenware). Tokens only.
+ *
+ * A daylit pottery workroom and the honest journey of a piece: bisque-white
+ * pages, a slip band for the first lesson, wet-clay charcoal for the studio and
+ * the footer, one celadon-teal glaze colour (owner-editable) for actions and the
+ * booking band. Calm and practical: sturdy Besley headings with italic
+ * highlights, square photographs of hands and clay, and the stage line — five
+ * short bars in the colours clay passes through — as the one ornament. Every
+ * section opens with .section-head (SectionMark + h2).
+ */
+
+/* ── Shared pieces ────────────────────────────────────────── */
+
+/* A section's label (SectionMark.tsx): the number, the stage line, the name. */
+.section-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.section-mark__n {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-md);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+.section-mark--on-dark {
+  color: var(--on-forest-soft);
+}
+
+.section-mark--on-dark .section-mark__n {
+  color: var(--accent-glow);
+}
+
+/* The stage line — the one ornament: wet · leather-hard · bone dry · bisque · glazed. */
+.stage-line {
+  display: inline-flex;
+  gap: var(--stage-gap);
+  flex: none;
+}
+
+.stage-line__bar {
+  inline-size: var(--stage-w);
+  block-size: var(--stage-h);
+  border-radius: 1px;
+}
+
+.stage-line__bar--1 { background: var(--stage-1); }
+.stage-line__bar--2 { background: var(--stage-2); }
+.stage-line__bar--3 { background: var(--stage-3); }
+.stage-line__bar--4 { background: var(--stage-4); box-shadow: inset 0 0 0 1px var(--stage-edge); }
+.stage-line__bar--5 { background: var(--stage-5); }
+
+.stage-line__bar[data-dim] {
+  opacity: 0.35;
+}
+
+.sample-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.tag--on-photo {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 1;
+  background: color-mix(in oklab, var(--raised) 92%, transparent);
+  color: var(--ink);
+  pointer-events: none;
+}
+
+.open-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.open-status__dot {
+  inline-size: var(--status-dot);
+  block-size: var(--status-dot);
+  border-radius: var(--radius-pill);
+  background: var(--muted);
+  flex: none;
+}
+
+.open-status[data-open='true'] .open-status__dot {
+  background: var(--mark);
+  box-shadow: 0 0 0 3px var(--mark-halo);
+}
+
+.skeleton--service {
+  block-size: 7rem;
+  margin-bottom: var(--space-3);
+}
+
+.skeleton--row {
+  block-size: 1.5rem;
+  margin-bottom: var(--space-2);
+}
+
+/* A photograph with an optional caption and a "Sample" tag (Frame.tsx). The frame's ratio is set
+   per section, so an owner's replacement of any shape is cropped, never stretched. */
+.photo-figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.photo-figure__frame {
+  position: relative;
+}
+
+.photo-figure .frame {
+  aspect-ratio: 4 / 5;
+}
+
+/* A photograph's caption: a small italic note under it. */
+.caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* Bands: slip (the first lesson) and wet clay (the studio). */
+.band--slip {
+  background: var(--oat);
+}
+
+.band--clay {
+  background: var(--forest);
+  color: var(--on-forest-soft);
+}
+
+.band--clay h2,
+.band--clay h3,
+.band--clay dt {
+  color: var(--on-forest);
+}
+
+.band--clay .hl {
+  color: var(--accent-glow);
+}
+
+.band--clay .caption {
+  color: var(--on-forest-faint);
+}
+
+.band--clay :focus-visible {
+  outline-color: var(--accent-glow);
+}
+
+/* Five numbered steps on one line — used by the first lesson. */
+.steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-5);
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.step__n {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-step-n);
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+.step__title {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-fact);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.step__text {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 720px) {
+  .steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 1100px) {
+  .steps {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+}
+
+/* Dark: the footer (wet clay). */
+.dark {
+  background: var(--forest);
+  color: var(--on-forest-soft);
+}
+
+.dark h2,
+.dark h3,
+.dark dt {
+  color: var(--on-forest);
+}
+
+.dark :focus-visible {
+  outline-color: var(--accent-glow);
+}
+
+/* A photograph's caption: small italic serif, like a note pencilled under it. */
+.caption {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+/* ── Banners ──────────────────────────────────────────────── */
+
+.banner {
+  position: relative;
+  z-index: var(--layer-banner);
+  padding: var(--space-2) var(--gutter);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.banner p {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.banner--preview {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.banner--draft {
+  background: var(--accent-tint);
+  color: var(--ink);
+}
+
+.banner__dot {
+  inline-size: var(--status-dot);
+  block-size: var(--status-dot);
+  border-radius: var(--radius-pill);
+  background: var(--ply);
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-header);
+  background: color-mix(in oklab, var(--paper) 94%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: var(--hairline) solid var(--rule);
+  transition: border-color var(--dur-quick) var(--ease-soft);
+}
+
+.site-header[data-at-top] {
+  border-bottom-color: transparent;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: var(--header-height);
+}
+
+.site-header__home {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+}
+
+.wordmark__words {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+/* The name in the serif's italic — like the signature on a print. */
+.wordmark__text {
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--weight-display);
+  font-size: var(--text-wordmark);
+  letter-spacing: var(--tracking-wordmark);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.wordmark__descriptor {
+  font-family: var(--font-mono);
+  padding-left: var(--space-3);
+  border-left: var(--hairline) solid var(--line-soft);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.wordmark__logo {
+  block-size: var(--logo-height);
+  inline-size: auto;
+  max-inline-size: var(--logo-max);
+  object-fit: contain;
+}
+
+.site-nav {
+  display: none;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding-inline: var(--space-1);
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  white-space: nowrap;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 80%;
+  background-size: 0 var(--rule-strong);
+  transition: background-size var(--dur-step) var(--ease-settle), color var(--dur-quick) var(--ease-soft);
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+  background-size: 100% var(--rule-strong);
+}
+
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.site-header__wide {
+  display: none;
+}
+
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap);
+  min-height: var(--tap);
+  padding-inline: var(--space-3);
+  border: var(--hairline) solid var(--line-input);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+
+.site-menu {
+  border-top: var(--hairline) solid var(--rule);
+  background: var(--paper);
+  padding-block: var(--space-3) var(--space-5);
+}
+
+.site-menu ul {
+  list-style: none;
+  display: grid;
+}
+
+.site-menu a {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  min-height: var(--control);
+  padding-block: var(--space-3);
+  border-bottom: var(--hairline) solid var(--rule);
+  color: var(--ink);
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-xl);
+  text-decoration: none;
+}
+
+.site-menu__n {
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-strong);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Phones: the name alone, so Book and Menu always fit beside it. */
+@media (max-width: 599px) {
+  .wordmark__descriptor {
+    display: none;
+  }
+}
+
+@media (min-width: 600px) {
+  .site-header__wide {
+    display: inline;
+  }
+}
+
+@media (min-width: 1240px) {
+  /* With the sections in the header, the name stands alone. */
+  .wordmark__descriptor {
+    display: none;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(var(--space-3), 1.4vw, var(--space-5));
+  }
+
+  .menu-toggle,
+  .site-menu {
+    display: none;
+  }
+}
+
+
+
+/* ── The first screen ─────────────────────────────────────── */
+
+.hero {
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.hero__inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.hero__text {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+}
+
+.hero__title {
+  max-width: 14ch;
+  font-size: var(--text-hero);
+  line-height: var(--leading-heading);
+  text-wrap: balance;
+}
+
+.hero__lede {
+  max-width: var(--measure-lede);
+  font-size: var(--text-lg);
+  color: var(--ink-soft);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.hero__status {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.hero__visual .frame {
+  aspect-ratio: 4 / 5;
+}
+
+.hero__visual .caption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* "Never tried pottery? Start here." — the two first lessons, live from the engine. */
+.start-here {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  position: relative;
+  overflow: hidden;
+  border: var(--hairline) solid var(--rule);
+  border-radius: var(--radius-2);
+  background: var(--raised);
+  box-shadow: var(--shadow-print);
+}
+
+/* The stage line along the card's top edge: where every first lesson starts. */
+.start-here::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  block-size: var(--staff-height);
+  background: var(--staff);
+}
+
+.start-here__title {
+  font-size: var(--text-card);
+  line-height: var(--leading-tight);
+}
+
+.start-here__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+}
+
+.start-here__list li + li {
+  border-top: var(--hairline) solid var(--rule);
+}
+
+.start-here__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-1) var(--space-4);
+  min-height: var(--control);
+  padding-block: var(--space-3);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.start-here__name {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-md);
+  line-height: var(--leading-tight);
+}
+
+.start-here__meta {
+  grid-column: 1;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.start-here__go {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-weight: var(--weight-strong);
+  font-size: var(--text-sm);
+  color: var(--accent-text);
+  white-space: nowrap;
+}
+
+.start-here__item:hover .start-here__name {
+  color: var(--accent-text);
+}
+
+.start-here__note {
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+/* The first screen settles in once; reduced motion skips it (tokens). */
+.hero__enter {
+  animation: rise var(--dur-enter) var(--ease-settle) both;
+}
+
+.hero__text > :nth-child(2) { animation-delay: var(--stagger); }
+.hero__text > :nth-child(3) { animation-delay: calc(2 * var(--stagger)); }
+.hero__text > :nth-child(4) { animation-delay: calc(3 * var(--stagger)); }
+.start-here { animation-delay: calc(4 * var(--stagger)); }
+
+.hero__visual .frame img {
+  animation: settle var(--dur-photo) var(--ease-settle) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise));
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(var(--settle-scale));
+  }
+}
+
+@media (min-width: 600px) and (max-width: 959px) {
+  .hero__visual .frame {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding-block: var(--space-6) var(--space-9);
+  }
+
+  .hero__inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-areas:
+      'text visual'
+      'start visual';
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(var(--space-6), 5vw, var(--space-9));
+    row-gap: var(--space-6);
+    align-items: start;
+  }
+
+  .hero__text {
+    grid-area: text;
+    padding-top: var(--space-5);
+  }
+
+  .hero__visual {
+    grid-area: visual;
+  }
+
+  .hero__visual .frame {
+    max-height: var(--hero-photo-max);
+  }
+
+  .start-here {
+    grid-area: start;
+    max-width: 30rem;
+  }
+}
+
+/* Wide screens: "Start here" rests on the photograph's lower corner, so it is part of the first
+   screen at every laptop size — the wheel stays clear above it. */
+@media (min-width: 1100px) {
+  .start-here {
+    grid-area: visual;
+    align-self: end;
+    justify-self: start;
+    z-index: 2;
+    inline-size: min(25rem, 86%);
+    margin-inline-start: calc(-1 * clamp(var(--space-7), 6vw, 7rem));
+    margin-block-end: var(--space-8);
+  }
+}
+
+/* Short laptop screens: a tighter first screen, so the actions stay well inside it. */
+@media (min-width: 960px) and (max-height: 820px) {
+  .hero {
+    padding-top: var(--space-4);
+  }
+
+  .hero__text {
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 1.2rem + 3vw, 3.75rem);
+  }
+
+  .hero__lede {
+    font-size: var(--text-md);
+  }
+}
+
+/* Very short phones: the headline and both actions stay in the first screen. */
+@media (max-width: 599px) {
+  .hero__actions .button {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 599px) and (max-height: 700px) {
+  .hero {
+    padding-top: var(--space-4);
+  }
+
+  .hero__text {
+    gap: var(--space-3);
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 1.3rem + 3.4vw, 2.375rem);
+  }
+
+  .hero__lede {
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .hero__eyebrow {
+    letter-spacing: 0.1em;
+  }
+
+  .hero__actions {
+    margin-top: 0;
+  }
+}
+
+/* Without a photo the first screen becomes a typographic cover. */
+.hero--text-only {
+  border-bottom: var(--hairline) solid var(--rule);
+}
+
+@media (min-width: 960px) {
+  .hero--text-only .hero__inner {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-areas: 'text start';
+    align-items: end;
+  }
+
+  .hero--text-only .hero__title {
+    max-width: 16ch;
+  }
+}
+
+/* ── 1 Wheel or hand ──────────────────────────────────────── */
+
+.techniques__pair {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.technique {
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+}
+
+.technique__photo .frame {
+  aspect-ratio: 4 / 3;
+}
+
+.technique__body {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.technique__title {
+  font-size: var(--text-xl);
+}
+
+.technique__text {
+  max-width: 52ch;
+  color: var(--ink-soft);
+}
+
+.technique__points {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.technique__points li {
+  padding-block: var(--space-3);
+  border-bottom: var(--hairline) solid var(--rule);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.technique__start {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  padding-top: var(--space-2);
+}
+
+.technique__first {
+  display: grid;
+}
+
+.technique__first-name {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-md);
+  color: var(--ink);
+}
+
+.technique__first-meta {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+@media (min-width: 720px) {
+  .techniques__pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(var(--space-6), 4vw, var(--space-9));
+  }
+
+  .technique__photo .frame {
+    aspect-ratio: 4 / 5;
+  }
+
+}
+
+
+.terms {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.term {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.term__title {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-fact);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.term__text {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.lessons__loading {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.skeleton--service {
+  block-size: 7rem;
+}
+
+.kind {
+  display: grid;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.kind__head {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.kind__title {
+  font-size: var(--text-xl);
+}
+
+.kind__note {
+  max-width: 34ch;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.kind__list {
+  list-style: none;
+  padding: 0;
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-4) var(--space-5);
+  padding-block: var(--space-5);
+  border-bottom: var(--hairline) solid var(--line-soft);
+}
+
+.row__main {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.row__name {
+  font-size: var(--text-service);
+}
+
+/* What this session needs or offers — said once, plainly, beside its name. */
+.row__flag {
+  justify-self: start;
+  padding: var(--space-1) var(--space-2);
+  border-left: var(--rule-strong) solid var(--accent);
+  background: var(--accent-wash);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-strong);
+  color: var(--ink);
+}
+
+.row__lead {
+  max-width: 62ch;
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.row__suits-unused {
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.row__suits-label {
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-tag);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.row__figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  align-items: flex-start;
+}
+
+.row__figures div {
+  display: grid;
+}
+
+.row__figures dt {
+  font-size: var(--text-micro);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.row__figures dd {
+  font-family: var(--font-display);
+  font-size: var(--text-price);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.row__figures .row__price-note {
+  font-family: var(--font-text);
+  font-size: var(--text-micro);
+  color: var(--muted);
+  white-space: normal;
+}
+
+.row__book {
+  align-self: center;
+}
+
+.lessons__price-note {
+  max-width: 70ch;
+  padding-top: var(--space-5);
+  border-top: var(--hairline) solid var(--rule);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 760px) {
+  .terms {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: start;
+  }
+
+  .row__main {
+    grid-column: auto;
+  }
+
+  .row__figures div {
+    min-inline-size: var(--figure-w);
+  }
+}
+
+@media (min-width: 1024px) {
+  .kind {
+    grid-template-columns: var(--kind-aside) minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+
+  .kind__head {
+    align-self: start;
+    padding-top: var(--space-5);
+  }
+}
+
+/* Lessons: level and what's included, as two short labelled lines. */
+.row__facts {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+}
+
+.row__facts div {
+  display: grid;
+  grid-template-columns: 5.75rem minmax(0, 1fr);
+  gap: 0 var(--space-2);
+}
+
+.row__facts dt {
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-tag);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The first lessons: where a beginner starts, on white with the glaze-colour edge. */
+.row--first {
+  margin-block: var(--space-3);
+  padding-inline: var(--space-5);
+  border: var(--hairline) solid var(--rule);
+  border-left: var(--edge) solid var(--accent);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  background: var(--raised);
+}
+
+/* What a lesson includes, and what is arranged after it. */
+.materials {
+  display: grid;
+  gap: var(--space-5);
+  margin-bottom: var(--space-7);
+  padding: clamp(var(--space-5), 4vw, var(--space-7));
+  border: var(--hairline) solid var(--rule);
+  border-radius: var(--radius-2);
+  background: var(--raised);
+}
+
+.materials__title {
+  font-size: var(--text-xl);
+}
+
+.materials__cols {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.materials__label {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.materials__list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.materials__list li {
+  position: relative;
+  padding: var(--space-3) 0 var(--space-3) var(--space-6);
+  border-bottom: var(--hairline) solid var(--rule);
+  color: var(--ink);
+}
+
+/* Included: a short glaze-colour tick. */
+.materials__list li::before {
+  content: '';
+  position: absolute;
+  left: 0.25rem;
+  top: calc(var(--space-3) + 0.45em);
+  inline-size: 0.7rem;
+  block-size: 0.38rem;
+  border-left: var(--rule-strong) solid var(--accent);
+  border-bottom: var(--rule-strong) solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+.materials__extra {
+  display: grid;
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.materials__extra div {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-3);
+  border-bottom: var(--hairline) solid var(--rule);
+}
+
+.materials__extra dt {
+  font-weight: var(--weight-strong);
+  color: var(--ink);
+}
+
+.materials__extra dd {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 860px) {
+  .materials__cols {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: var(--space-8);
+  }
+}
+
+/* ── 3 Your first lesson (slip) ───────────────────────────── */
+
+.first__top {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.first__head {
+  margin-bottom: 0;
+}
+
+.first__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.first__photo .frame {
+  aspect-ratio: 4 / 3;
+}
+
+.first__steps {
+  margin-bottom: var(--space-8);
+}
+
+.first__bottom {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.answers {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.answer {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border-radius: var(--radius-2);
+  background: var(--raised);
+}
+
+.answer dt {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-md);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.answer dd {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.wear {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.wear__title {
+  font-size: var(--text-xl);
+}
+
+.wear__list {
+  list-style: none;
+  padding: 0;
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.wear__list li {
+  padding-block: var(--space-3);
+  border-bottom: var(--hairline) solid var(--line-soft);
+  color: var(--ink);
+}
+
+@media (min-width: 720px) {
+  .first__photo .frame {
+    aspect-ratio: 16 / 10;
+  }
+
+  .answers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .first__top {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(var(--space-6), 5vw, var(--space-9));
+    align-items: center;
+  }
+
+  .first__top--text {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .first__photo .frame {
+    aspect-ratio: 4 / 5;
+  }
+
+  .first__bottom {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+/* ── 4 Clay to kiln ───────────────────────────────────────── */
+
+.journey {
+  margin-bottom: var(--space-8);
+}
+
+.journey__brackets {
+  display: none;
+}
+
+.journey__stages {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(64vw, 17rem);
+  gap: var(--space-5);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  margin-inline: calc(-1 * var(--gutter));
+  padding: 0 var(--gutter) var(--space-4);
+}
+
+.journey__stage {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  scroll-snap-align: start;
+}
+
+.journey__part {
+  justify-self: start;
+  font-size: var(--text-micro);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-tag);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.journey__stage[data-part='lesson'] .journey__part {
+  color: var(--accent-text);
+}
+
+.journey__photo .frame {
+  aspect-ratio: 1;
+}
+
+/* Each stage wears its own colour from the stage line, as a bar under the photo. */
+.journey__stage::after {
+  content: '';
+  order: 2;
+  block-size: var(--marker-bar);
+  border-radius: 1px;
+  background: var(--tone);
+  box-shadow: inset 0 0 0 1px var(--tone-edge, transparent);
+}
+
+.journey__stage--1 { --tone: var(--stage-1); }
+.journey__stage--2 { --tone: var(--stage-2); }
+.journey__stage--3 { --tone: var(--stage-3); }
+.journey__stage--4 { --tone: var(--stage-4); --tone-edge: var(--stage-edge); }
+.journey__stage--5 { --tone: var(--stage-5); }
+
+.journey__part { order: 0; }
+.journey__photo { order: 1; }
+.journey__name { order: 3; }
+.journey__text { order: 4; }
+
+.journey__name {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-card);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.journey__n {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--accent-text);
+}
+
+.journey__text {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.kiln__notes {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* The line that matters most: set apart, ruled, on white, with the glaze-colour edge. */
+.boundary {
+  display: grid;
+  gap: var(--space-3);
+  padding: clamp(var(--space-5), 4vw, var(--space-7));
+  border: var(--hairline) solid var(--ink);
+  border-left: var(--edge) solid var(--accent);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  background: var(--raised);
+}
+
+.boundary__title {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-xl);
+  letter-spacing: var(--heading-tracking);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.boundary__text {
+  max-width: 68ch;
+  color: var(--ink-soft);
+}
+
+.kiln__note {
+  display: grid;
+  align-content: start;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: var(--space-5);
+  align-items: start;
+  padding-top: var(--space-5);
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.kiln__note--text,
+.kiln__note--collect {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.kiln__crack-photo .frame {
+  aspect-ratio: 1;
+}
+
+.kiln__note-title {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-card);
+}
+
+.kiln__note-text {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+@media (min-width: 960px) {
+  .journey__brackets {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    column-gap: var(--space-5);
+    margin-bottom: var(--space-4);
+  }
+
+  /* A bracket over the stages it names: a fine line with turned-down ends, and its label. */
+  .journey__bracket {
+    position: relative;
+    padding: var(--space-3) 0 0;
+    border-top: var(--rule-strong) solid var(--line-soft);
+    font-size: var(--text-micro);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--tracking-tag);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .journey__bracket::before,
+  .journey__bracket::after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--rule-strong));
+    block-size: var(--space-2);
+    inline-size: var(--rule-strong);
+    background: inherit;
+    background: var(--line-soft);
+  }
+
+  .journey__bracket::before { left: 0; }
+  .journey__bracket::after { right: 0; }
+
+  .journey__bracket--lesson {
+    grid-column: 1;
+    border-top-color: var(--accent);
+    color: var(--accent-text);
+  }
+
+  .journey__bracket--lesson::before,
+  .journey__bracket--lesson::after {
+    background: var(--accent);
+  }
+
+  .journey__bracket--after {
+    grid-column: 2 / -1;
+  }
+
+  .journey__stages {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-auto-columns: auto;
+    overflow: visible;
+    margin-inline: 0;
+    padding: 0;
+  }
+
+  .journey__part {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .kiln__notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-7) var(--space-8);
+  }
+
+  .boundary {
+    grid-column: 1 / -1;
+  }
+
+  .kiln__note {
+    grid-template-columns: 9rem minmax(0, 1fr);
+  }
+
+  .kiln__note--text,
+  .kiln__note--collect {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ── 5 The studio (wet clay) ──────────────────────────────── */
+
+.studio__top {
+  display: grid;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.studio__words .section-head {
+  margin-bottom: var(--space-5);
+}
+
+.studio__text {
+  max-width: 54ch;
+  font-size: var(--text-md);
+  color: var(--on-forest-soft);
+}
+
+.studio__wide .frame {
+  aspect-ratio: 3 / 2;
+}
+
+.studio__frames {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: min(72vw, 20rem);
+  gap: var(--space-5);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  margin: 0 calc(-1 * var(--gutter)) var(--space-5);
+  padding: 0 var(--gutter) var(--space-3);
+}
+
+.studio__frame {
+  scroll-snap-align: start;
+}
+
+.studio__sample-note {
+  max-width: 70ch;
+  margin-bottom: var(--space-7);
+  font-size: var(--text-xs);
+  color: var(--on-forest-faint);
+}
+
+.studio__facts {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.studio__fact {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: var(--hairline) solid var(--forest-line-strong);
+}
+
+.studio__fact dt {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-fact);
+  line-height: var(--leading-tight);
+}
+
+.studio__fact dd {
+  font-size: var(--text-sm);
+  color: var(--on-forest-soft);
+}
+
+@media (min-width: 640px) {
+  .studio__frames {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-columns: auto;
+    overflow: visible;
+    margin-inline: 0;
+    padding: 0;
+  }
+
+  .studio__frames[data-count='2'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .studio__frames[data-count='1'] {
+    grid-template-columns: minmax(0, 24rem);
+  }
+
+  .studio__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 960px) {
+  .studio__top {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(var(--space-6), 5vw, var(--space-9));
+    align-items: end;
+    margin-bottom: var(--space-7);
+  }
+
+  .studio__top--text {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .studio__facts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ── 7 Good to know ───────────────────────────────────────── */
+
+.faq__grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.faq__head {
+  margin-bottom: 0;
+}
+
+.faq__list {
+  border-top: var(--hairline) solid var(--ink);
+}
+
+.qa {
+  border-bottom: var(--hairline) solid var(--line-soft);
+}
+
+.qa summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--control);
+  padding-block: var(--space-4);
+  cursor: pointer;
+  list-style: none;
+}
+
+.qa summary::-webkit-details-marker {
+  display: none;
+}
+
+.qa__q {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-card);
+  letter-spacing: var(--heading-tracking);
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.qa__icon {
+  position: relative;
+  flex: none;
+  inline-size: var(--space-5);
+  block-size: var(--space-5);
+}
+
+.qa__icon::before,
+.qa__icon::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  block-size: var(--rule-strong);
+  margin-top: calc(-1 * var(--hairline));
+  background: var(--accent);
+  transition: transform var(--dur-step) var(--ease-settle);
+}
+
+.qa__icon::after {
+  transform: rotate(90deg);
+}
+
+.qa[open] .qa__icon::after {
+  transform: rotate(0deg);
+}
+
+.qa__a {
+  padding-bottom: var(--space-5);
+  max-width: 64ch;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 960px) {
+  .faq__grid {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+    gap: var(--space-8);
+  }
+
+  .faq__head {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-6));
+    align-self: start;
+  }
+}
+
+
+/* ── Booking band (the brand colour) ──────────────────────── */
+
+/* The one place the brand colour fills a whole band: the call to book. Text on it is white. */
+.book {
+  position: relative;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.book h2,
+.book h3,
+.book p,
+.book .section-intro,
+.book .book__step,
+.book .book__text,
+.book .eyebrow,
+.book .hl {
+  color: var(--on-accent);
+}
+
+.book .eyebrow::before {
+  background: var(--on-accent);
+}
+
+.book :focus-visible {
+  outline-color: var(--on-accent);
+}
+
+.book .button {
+  background: var(--raised);
+  border-color: var(--raised);
+  color: var(--accent-text);
+}
+
+.book .button:hover {
+  background: var(--paper);
+  border-color: var(--paper);
+}
+
+.book .notice,
+.book .contact-instead {
+  padding: var(--space-5);
+  border-radius: var(--radius-2);
+  background: var(--raised);
+  color: var(--ink);
+}
+
+.book .contact-instead a {
+  color: var(--accent-text);
+}
+
+.book .notice p,
+.book .contact-instead p,
+.book .contact-instead h3 {
+  color: var(--ink);
+}
+
+.book__grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.book__head {
+  margin-bottom: 0;
+}
+
+.book__head h2 {
+  font-size: var(--text-3xl);
+}
+
+.book__how {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-6);
+}
+
+.book__steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-4);
+  inline-size: 100%;
+}
+
+.book__steps li {
+  display: grid;
+  grid-template-columns: var(--space-6) minmax(0, 1fr);
+  column-gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: var(--hairline) solid color-mix(in oklab, var(--on-accent) 36%, var(--accent));
+}
+
+.book__n {
+  grid-row: span 2;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-xl);
+  line-height: 1;
+  color: var(--on-accent);
+}
+
+.book__step {
+  font-weight: var(--weight-strong);
+}
+
+.book__text {
+  font-size: var(--text-sm);
+}
+
+.book__loading {
+  max-width: var(--form-max);
+}
+
+@media (min-width: 960px) {
+  .book__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+/* ── 8 Visit ──────────────────────────────────────────────── */
+
+.visit__grid {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.visit__col {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.visit__col h3 {
+  padding-bottom: var(--space-3);
+  border-bottom: var(--hairline) solid var(--ink);
+  font-size: var(--text-xl);
+}
+
+.hours {
+  display: grid;
+}
+
+.hours__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-2);
+  border-bottom: var(--hairline) solid var(--rule);
+}
+
+.hours__row dt {
+  color: var(--ink);
+}
+
+.hours__row dd {
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.hours__row--today dt,
+.hours__row--today dd {
+  font-weight: var(--weight-strong);
+  color: var(--ink);
+}
+
+.hours__row--today dt::after {
+  content: 'Today';
+  margin-left: var(--space-2);
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-1);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--text-micro);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-tag);
+  text-transform: uppercase;
+  vertical-align: 0.1em;
+}
+
+.hours-changes {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.hours-changes h4 {
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-strong);
+  letter-spacing: 0;
+}
+
+.hours-changes ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.contact {
+  display: grid;
+  gap: var(--space-2);
+  font-style: normal;
+}
+
+.contact__name {
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  font-size: var(--text-lg);
+  color: var(--ink);
+}
+
+.contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  color: var(--ink);
+  font-weight: var(--weight-medium);
+}
+
+.contact__directions {
+  justify-self: start;
+}
+
+@media (min-width: 720px) {
+  .visit__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-7);
+  }
+}
+
+@media (min-width: 1024px) {
+  .visit__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ── Footer (wet clay) ───────────────────────────────────────── */
+
+.site-footer {
+  background: var(--forest);
+  color: var(--on-forest-soft);
+  padding-block: var(--space-9) var(--space-6);
+}
+
+.site-footer a {
+  color: var(--on-forest);
+}
+
+/* The footer’s Book button: bisque on charcoal. */
+.site-footer a.button {
+  color: var(--forest);
+}
+
+.site-footer :focus-visible {
+  outline-color: var(--accent-glow);
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.site-footer__brand {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+}
+
+.site-footer__name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--weight-display);
+  font-size: var(--text-footer-name);
+  line-height: 0.95;
+  color: var(--on-forest);
+}
+
+/* A fine rule under the name, on charcoal. */
+.site-footer__name::after {
+  content: '';
+  display: block;
+  inline-size: min(100%, 14rem);
+  block-size: var(--hairline);
+  margin-top: var(--space-5);
+  background: var(--forest-line-strong);
+}
+
+.site-footer__tagline {
+  max-width: 40ch;
+}
+
+.site-footer__brand .button {
+  margin-top: var(--space-3);
+}
+
+.site-footer__col {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.site-footer__label {
+  font-size: var(--text-micro);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--on-forest-faint);
+}
+
+.site-footer__col ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+}
+
+.site-footer__col ul a,
+.site-footer__contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  text-decoration: none;
+}
+
+.site-footer__col ul a:hover,
+.site-footer__contact a:hover {
+  text-decoration: underline;
+}
+
+.site-footer__contact {
+  display: grid;
+  font-style: normal;
+}
+
+.site-footer__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: var(--hairline) solid var(--forest-line);
+  font-size: var(--text-sm);
+  color: var(--on-forest-faint);
+}
+
+.site-footer__staff {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  color: var(--on-forest-soft);
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 720px) {
+  .site-footer__inner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.site-header__book {
+  white-space: nowrap;
+}
+
+/* The narrowest phones: a smaller name mark, so the name, Book and Menu share one line. */
+@media (max-width: 359px) {
+  .wordmark__text {
+    font-size: 1.25rem;
+  }
+
+  .site-header__inner {
+    gap: var(--space-2);
+  }
+
+
+  .site-header__actions .button--small {
+    padding-inline: var(--space-4);
+  }
+
+  .menu-toggle {
+    padding-inline: var(--space-2);
+  }
+}
+
+/* Without a photo, "Start here" sits beside the words, not over a photograph. */
+@media (min-width: 960px) {
+  .hero--text-only .start-here {
+    grid-area: start;
+    align-self: end;
+    inline-size: auto;
+    margin: 0;
+  }
+}

@@ -1,0 +1,257 @@
+/*
+ * Turning Room Pottery Studio — design tokens (Greenware).
+ * The ONLY file with raw colours, fonts, sizes and spacing (see DESIGN.md).
+ * Every other stylesheet uses these custom properties.
+ *
+ * The idea: a daylit pottery workroom, and the honest journey of a piece —
+ * greenware (unfired clay) on the shelf, then bisque, then glaze. Bisque-white
+ * pages, a pale slip band for the first lesson, the warm charcoal of wet clay
+ * for the studio, the booking sheet's header and the footer, and one brand
+ * colour — a deep celadon-teal glaze by default, owner-editable — that carries
+ * white text: buttons, the italic highlight, selected choices, the booking band.
+ * The one ornament is the stage line: five short bars in the colours clay passes
+ * through (wet · leather-hard · bone dry · bisque · glazed). Besley for headings
+ * and figures (sturdy, soft-shouldered, thrown rather than drawn); Karla for
+ * everything else. Square photographs, softly rounded controls.
+ *
+ * Token names are shared with the other Niche Pack starters (so booking.css
+ * reads the same everywhere); the comments say what each one is here.
+ */
+:root {
+  /* ── Colour ─────────────────────────────────────────────── */
+  --paper: #f6f4ef;          /* bisque white — the page */
+  --raised: #ffffff;         /* white — inputs, the booking sheet, lesson rows */
+  --oat: #ebe6dd;            /* slip — the first-lesson band, the booking summary */
+  --oat-deep: #ddd6ca;       /* frames while loading, skeletons */
+  --sage-100: #f1eee8;       /* quiet highlights */
+  --sage-200: #e5dfd5;       /* tags, done steps */
+  --rule: #dcd5c9;           /* hairlines (decorative) */
+  --line-input: #77706a;     /* input and icon-button borders (≥ 3:1 on bisque, slip and white) */
+  --line-soft: #b7afa3;      /* borders of choice buttons named by their own text */
+  --mark: #2f6b4f;           /* the "open" dot (≥ 3:1) */
+  --ink: #1f2220;            /* iron-black slip — 15.3:1 on the page */
+  --ink-soft: #3a3e3b;       /* 10.6:1 */
+  --muted: #5d605b;          /* 6:1 on the page, 5.3:1 on slip */
+  --clay: #a3261b;           /* errors only (with an icon or words, never colour alone) */
+  --ply: #c8bfb1;            /* decorative only (rules, the sheet's edge) */
+  --honey-wash: #f2eee6;
+  --scrim: rgb(31 34 32 / 0.08);
+  --veil: rgb(24 26 24 / 0.6); /* the page behind the booking sheet */
+  --clay-wash: color-mix(in oklab, var(--clay) 6%, var(--raised));
+  --mark-halo: color-mix(in oklab, var(--mark) 22%, transparent);
+
+  /* Wet clay: the studio band, the booking sheet's header and the footer (never owner-editable). */
+  --forest: #2a2b28;         /* wet-clay charcoal */
+  --forest-2: #343531;       /* a raised panel */
+  --forest-3: #41423d;       /* a lifted panel, hover */
+  --on-forest: #f4f0e8;      /* 14.3:1 on charcoal */
+  --on-forest-soft: #d8d3c9; /* 10.9:1 */
+  --on-forest-faint: #aaa59b; /* 6.4:1 — small print on charcoal only */
+  --forest-line: #474843;    /* decorative rules on charcoal */
+  --forest-line-strong: #64655e;
+  --light: #ffffff;
+
+  /* Owner-editable (brand.accent) — the glaze colour — set on <html> at run time.
+     A DEEP colour that carries white text (the editor checks any new colour at 4.5:1
+     against white): buttons, the italic highlight, selected choices, state edges. */
+  --accent: #1d5c5a;
+  --accent-strong: color-mix(in oklab, var(--accent) 86%, #000);
+  --accent-deep: color-mix(in oklab, var(--accent) 66%, #000);
+  --accent-tint: color-mix(in oklab, var(--accent) 16%, var(--raised));
+  --accent-wash: color-mix(in oklab, var(--accent) 7%, var(--raised));
+  --on-accent: #ffffff;      /* white on celadon teal, 7.4:1 */
+  --on-accent-soft: #e3f0ee;
+  /* On bisque the glaze colour reads as text and as a state edge itself. */
+  --accent-text: var(--accent);
+  --accent-edge: var(--accent);
+  --accent-line: var(--accent-deep);
+  --focus: var(--accent);
+  /* The glaze colour on charcoal: a pale celadon made from it, so highlights and focus read (≥ 4.5:1). */
+  --accent-glow: color-mix(in oklab, var(--accent) 26%, #effaf6);
+
+  /* The stage line — the one ornament: the colours clay passes through on its way to the kiln. */
+  --stage-1: #6e675f;        /* wet clay */
+  --stage-2: #a39887;        /* leather-hard */
+  --stage-3: #d3cabc;        /* bone dry */
+  --stage-4: #efe7da;        /* bisque (drawn with a fine edge) */
+  --stage-5: var(--accent);  /* glazed — the brand colour */
+  --stage-edge: #c4baab;
+  --stage-w: 0.875rem;       /* one bar in a section mark */
+  --stage-h: 0.3125rem;
+  --stage-gap: 2px;
+  /* Kept for the shared booking styles: the foot of the sheet's header. */
+  --staff-height: 4px;
+  --staff: linear-gradient(90deg, var(--stage-1) 0 20%, var(--stage-2) 20% 40%, var(--stage-3) 40% 60%, var(--stage-4) 60% 80%, var(--stage-5) 80%);
+  --staff-on-dark: var(--staff);
+  --ticks-on-dark: var(--staff);
+  --tick-tall: var(--staff-height);
+  --marker-bar: 0.375rem;
+
+  /* ── Type ───────────────────────────────────────────────── */
+  --font-display: 'Besley', 'Rockwell', 'Iowan Old Style', Georgia, serif;
+  --font-text: 'Karla', 'Avenir Next', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-sans-display: 'Karla', 'Avenir Next', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  /* No monospace: small labels use Karla capitals with tabular figures. */
+  --font-mono: var(--font-text);
+
+  --text-micro: 0.8125rem;
+  --text-xs: 0.875rem;
+  --text-sm: 1rem;
+  --text-md: clamp(1.0625rem, 1.02rem + 0.15vw, 1.125rem);
+  --text-lg: clamp(1.1875rem, 1.1rem + 0.35vw, 1.375rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.7vw, 1.875rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2vw, 3.25rem);
+  --text-3xl: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  --text-hero: clamp(2.5rem, 1.45rem + 3.4vw, 4.5rem);
+  --text-statement: clamp(1.625rem, 1.2rem + 1.6vw, 2.625rem);
+  --text-numeral: clamp(2.25rem, 1.8rem + 1.8vw, 3.25rem);
+  --text-code: clamp(1.875rem, 1.6rem + 1.2vw, 2.375rem);
+  --text-step: clamp(1.5rem, 1.32rem + 0.6vw, 1.875rem);  /* a booking step's heading */
+  --text-sheet: clamp(1.1875rem, 1.1rem + 0.3vw, 1.375rem); /* the booking sheet's title */
+  --text-service: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-price: clamp(1.25rem, 1.12rem + 0.45vw, 1.5rem);
+  --text-fact: clamp(1.125rem, 1.04rem + 0.3vw, 1.3125rem);
+  --text-wordmark: clamp(1.5rem, 1.38rem + 0.45vw, 1.8125rem);
+  --text-footer-name: clamp(3rem, 1.6rem + 5vw, 6rem);
+  --text-card: clamp(1.1875rem, 1.1rem + 0.3vw, 1.375rem);
+  --text-step-n: clamp(1.75rem, 1.5rem + 0.9vw, 2.375rem); /* step numbers 01–05 */
+
+  --leading-display: 1;
+  --leading-heading: 1.08;
+  --leading-body: 1.6;
+  --leading-tight: 1.28;
+
+  --tracking-display: -0.02em;
+  --tracking-eyebrow: 0.16em;
+  --tracking-button: 0.01em;
+  --tracking-code: 0.42em;
+  --tracking-tag: 0.08em;
+  --tracking-wordmark: -0.005em;
+  --tracking-mono: 0.02em;
+
+  --weight-text: 400;
+  --weight-strong: 700;
+  --weight-medium: 600;
+  --weight-display: 500;   /* Besley Medium */
+  --weight-sans-display: 700;
+
+  /* No width axis; kept for the shared booking styles. */
+  --stretch-display: 100%;
+  --stretch-label: 100%;
+  --stretch-text: 100%;
+
+  /* Heading style (brand.headings): serif (default) | sans */
+  --heading-font: var(--font-display);
+  --heading-weight: var(--weight-display);
+  --heading-stretch: var(--stretch-display);
+  --heading-tracking: var(--tracking-display);
+  --heading-light-weight: var(--weight-display);
+
+  --measure: 62ch;
+  --measure-lede: 44ch;
+  --measure-title: 16ch;
+
+  /* ── Space ──────────────────────────────────────────────── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8.5rem;
+
+  --gutter: clamp(1rem, 4.5vw, 4.5rem);
+  --section-pad: clamp(4.5rem, 2.4rem + 6.4vw, 8.5rem);
+  --desk-pad: clamp(var(--space-5), 4vw, var(--space-8));
+  --page-max: 78rem;
+  --header-height: 4.5rem;
+  --sheet-width: 60rem;      /* the booking sheet from 960 px */
+
+  /* ── Sizes ──────────────────────────────────────────────── */
+  --tap: 2.75rem;            /* 44 px — the smallest tap target */
+  --control: 3.25rem;        /* 52 px — buttons */
+  --input: 3rem;             /* 48 px — inputs in the booking sheet */
+  --chip: 2.75rem;           /* 44 px — time chips (the smallest tap target) */
+  --day-cell: 2.75rem;       /* 44 px — month grid cells */
+  --day-card-w: 4rem;        /* 64 px — phone day rail */
+  --day-card-h: 5.25rem;     /* 84 px */
+  --dot: 0.3125rem;          /* 5 px — the "open" mark */
+  --drop: 0.75rem;           /* 12 px */
+  --edge: 3px;               /* the brand-colour edge under the booking sheet's header */
+  --hairline: 1px;
+  --rule-strong: 2px;
+  --focus-width: 2px;
+  --focus-offset: 3px;
+  --logo-height: 1.875rem;
+  --logo-max: 11rem;
+  --summary-width: 17rem;
+  --time-min: 6rem;          /* a time chip's narrowest width */
+  --label-col: 7rem;
+  --form-max: 34rem;
+  --code-width: 15rem;
+  --code-height: 4rem;
+  --sticky-offset: 6rem;     /* room above a step heading for the phone summary strip */
+  --kind-aside: 16rem;       /* a kind's title column in the price list */
+  --figure-w: 7.5rem;        /* a service row's length / fee column */
+  --service-thumb: 4rem;
+  --hero-photo-max: calc(100svh - var(--header-height) - var(--space-7)); /* the first screen's photo, desktop */
+  --status-dot: 0.5rem;
+  --skeleton-block: 20rem;
+  --skeleton-times: 9rem;
+
+  /* ── Shape ──────────────────────────────────────────────── */
+  /* Workshop: softly rounded controls (like a rib's edge), square photographs. */
+  --radius-0: 0;
+  --radius-1: 4px;           /* inputs, chips, small controls */
+  --radius-2: 6px;           /* the booking sheet, cards */
+  --radius-photo: 0;         /* photographs: square */
+  --radius-button: 999px;    /* buttons: round-ended, like a coil of clay */
+  --radius-nail: 50%;        /* round marks (kept name: shared booking styles) */
+  --radius-pill: 999px;
+  --shadow-soft: 0 -0.5rem 1.5rem var(--scrim);
+  --shadow-top: 0 0.5rem 1.5rem var(--scrim);
+  --shadow-print: 0 1.25rem 2.5rem -1.25rem rgb(31 34 32 / 0.28);
+  --shadow-sheet: -1.5rem 0 4rem rgb(31 34 32 / 0.26);
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --dur-quick: 160ms;
+  --dur-step: 280ms;
+  --dur-enter: 700ms;
+  --dur-photo: 1100ms;
+  --dur-sheet: 420ms;
+  --stagger: 80ms;
+  --dur-shimmer: 1600ms;
+  --dur-spin: 900ms;
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+  --rise: 0.75rem;
+  --settle-scale: 1.03;
+
+  /* ── Layers ─────────────────────────────────────────────── */
+  --layer-sticky: 5;
+  --layer-banner: 10;
+  --layer-header: 8;
+}
+
+:root[data-headings='sans'] {
+  --heading-font: var(--font-sans-display);
+  --heading-weight: var(--weight-sans-display);
+  --heading-light-weight: var(--weight-sans-display);
+  --heading-tracking: -0.015em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-quick: 1ms;
+    --dur-step: 1ms;
+    --dur-enter: 1ms;
+    --dur-photo: 1ms;
+    --dur-sheet: 1ms;
+    --stagger: 0ms;
+    --rise: 0px;
+    --settle-scale: 1;
+  }
+}

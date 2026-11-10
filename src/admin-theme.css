@@ -1,0 +1,10 @@
+/*
+ * The packaged dashboard keeps its own design. The site brands it with one
+ * thing — its accent, per appearance (INTEGRATION.md §10). Greenware's brand
+ * colour is a deep celadon teal that carries white text, so Light uses it as
+ * is; on the dark dashboard a deep teal fill would sink into the background, so
+ * Dark uses a pale celadon with near-black text. Owner monogram, primary
+ * buttons, Confirm, focus rings, selection and the schedule's "now" line all follow it.
+ */
+:root .pbe-admin[data-mode='light'] { --pbe-accent: #1d5c5a; --pbe-accent-text: #ffffff; } /* ≈7.4:1 white on teal; ≈7.4:1 on white */
+:root .pbe-admin[data-mode='dark']  { --pbe-accent: #8fcfc6; --pbe-accent-text: #102221; } /* ≈10:1 on a near-black dashboard; dark text ≈10:1 */
